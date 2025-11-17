@@ -1,60 +1,436 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Script Loader</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iron Doors | Premium Script</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #00f2ff; /* Cyan Neon */
+            --secondary: #bd00ff; /* Purple Neon */
+            --bg-dark: #050507;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(189, 0, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 255, 0.08) 0%, transparent 40%);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Tech Grid Background Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header & Logo */
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .logo-img {
+            max-width: 250px; /* Adjust based on your actual png size */
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover .logo-img {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 30px rgba(189, 0, 255, 0.5));
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5em;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Sections */
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 5px;
+            height: 30px;
+            background: var(--secondary);
+            box-shadow: 0 0 15px var(--secondary);
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 35px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1);
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .feature-card:hover::after {
+            transform: translateX(100%);
+        }
+
+        .feature-card h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Terminal Script Box */
+        .script-section {
+            margin-bottom: 80px;
+        }
+
+        .terminal-window {
+            background: #0a0b10;
+            border-radius: 12px;
+            border: 1px solid #333;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .terminal-header {
+            background: #1c1c24;
+            padding: 10px 20px;
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid #333;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .script-content {
+            padding: 30px;
+            position: relative;
+        }
+
+        .code-block {
+            font-family: 'Courier New', monospace;
+            color: var(--primary);
+            font-size: 1.1em;
+            background: rgba(0, 242, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+            word-break: break-all;
+            margin-bottom: 25px;
+        }
+
+        .action-area {
+            text-align: center;
+        }
+
+        .copy-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid var(--primary);
+            padding: 15px 40px;
+            font-size: 1em;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+        }
+
+        /* Credits */
+        .credits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .credit-pill {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            border: 1px solid var(--border);
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .credit-pill:hover {
+            border-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .role {
+            font-size: 0.8em;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .name {
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        footer {
+            margin-top: 80px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9em;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .anim {
+            animation: slideIn 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        /* Notification Toast */
+        .notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Mobile fixes */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .feature-card { padding: 25px; }
+        }
+    </style>
 </head>
 <body>
+
+    <div class="container">
+        
+        <header class="anim" style="animation-delay: 0.1s;">
+            <div class="logo-container">
+                <img src="logo.png" alt="Iron Doors Logo" class="logo-img">
+            </div>
+            <h1>Iron Doors</h1>
+            <p class="subtitle">The ultimate Doors Mod Script featuring Custom Entities, Items, and advanced mechanics.</p>
+        </header>
+
+        <section class="anim" style="animation-delay: 0.3s;">
+            <h2 class="section-title">Release Features</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>👾 Custom Entities</h3>
+                    <p>Unique entities with completely custom behavior, jumpscares, and advanced AI mechanics.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎁 Custom Items</h3>
+                    <p>Free custom tools and items designed to enhance gameplay and provide new abilities.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>✨ Optimization</h3>
+                    <p>Lightweight code execution with tons of additional functions, stability fixes, and improvements.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="anim script-section" style="animation-delay: 0.5s;">
+            <h2 class="section-title">Execute Script</h2>
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="script-content">
+                    <p style="color: #666; margin-bottom: 10px; font-family: monospace;">// Copy and paste into your executor</p>
+                    <div class="code-block" id="scriptCode">loadstring(game:HttpGet("https://irondoors.vercel.app/script.lua"))()</div>
+                    
+                    <div class="action-area">
+                        <button class="copy-btn" onclick="copyScript()">
+                            Copy Script
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="anim" style="animation-delay: 0.7s;">
+            <h2 class="section-title">Dev Team</h2>
+            <div class="credits-grid">
+                <div class="credit-pill">
+                    <div class="name">Sobaka</div>
+                    <div class="role">Main Code</div>
+                </div>
+                <div class="credit-pill">
+                    <div class="name">Qiwik</div>
+                    <div class="role">Custom Entities</div>
+                </div>
+                <div class="credit-pill">
+                    <div class="name">Wicked</div>
+                    <div class="role">Design & Media</div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Iron Doors © 2025 | Made with ❤️ for the Doors Community</p>
+        </footer>
+
+    </div>
+
+    <div class="notification" id="notification">
+        SUCCESS // SCRIPT COPIED TO CLIPBOARD
+    </div>
+
     <script>
-        // Загрузка и отдача чистого скрипта
-        async function loadAndServeScript() {
-            try {
-                const response = await fetch('script.lua');
-                if (!response.ok) {
-                    document.body.textContent = '-- Error: script.lua not found';
-                    return;
-                }
-                const script = await response.text();
+        function copyScript() {
+            const scriptText = document.getElementById('scriptCode').textContent;
+            
+            navigator.clipboard.writeText(scriptText).then(() => {
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
                 
-                // Полностью заменяем всю страницу на чистый текст скрипта
-                document.open();
-                document.write(script);
-                document.close();
-                
-                // Устанавливаем правильный Content-Type
-                document.contentType = 'text/plain';
-            } catch (error) {
-                document.body.textContent = '-- Error loading script';
-            }
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }).catch(err => {
+                alert('Error copying script: ' + err);
+            });
         }
-
-        loadAndServeScript();
-    </script>
-</body>
-</html></head>
-<body>
-    <pre><code id="content">-- Loading...</code></pre>
-
-    <script>
-        // Загрузка скрипта из файла
-        async function loadScript() {
-            try {
-                const response = await fetch('script.lua');
-                if (!response.ok) {
-                    throw new Error('File not found');
-                }
-                return await response.text();
-            } catch (error) {
-                return '-- Error: script.lua not found';
-            }
-        }
-
-        // Загрузка контента
-        window.onload = async function() {
-            const contentElement = document.getElementById('content');
-            const script = await loadScript();
-            contentElement.textContent = script;
-        };
     </script>
 </body>
 </html>
