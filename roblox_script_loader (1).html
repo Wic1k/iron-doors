@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Loader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0d1117;
+            color: #c9d1d9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        pre {
+            background: #161b22;
+            padding: 0;
+            margin: 0;
+            overflow-x: auto;
+            white-space: pre;
+            word-wrap: normal;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #c9d1d9;
+            display: block;
+        }
+
+        .error-container {
+            background: #161b22;
+            border: 2px solid #f85149;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .error-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #f85149;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="content">
+        <pre><code>-- Loading...</code></pre>
+    </div>
+
+    <script>
+        // Проверка на Roblox executor
+        function isRobloxExecutor() {
+            return typeof game !== 'undefined' || 
+                   typeof workspace !== 'undefined' ||
+                   window.location.href.includes('roblox') ||
+                   navigator.userAgent.includes('Roblox');
+        }
+
+        // Загрузка скрипта из файла
+        async function loadScript() {
+            try {
+                const response = await fetch('script.lua');
+                if (!response.ok) {
+                    throw new Error('Файл script.lua не найден');
+                }
+                const script = await response.text();
+                return script;
+            } catch (error) {
+                console.error('Ошибка загрузки скрипта:', error);
+                return null;
+            }
+        }
+
+        // Загрузка контента
+        window.onload = async function() {
+            const contentDiv = document.getElementById('content');
+            
+            if (isRobloxExecutor()) {
+                const script = await loadScript();
+                
+                if (script) {
+                    // Просто показываем чистый код
+                    contentDiv.innerHTML = `<pre><code>${script.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`;
+                } else {
+                    contentDiv.innerHTML = `
+                        <div class="error-container">
+                            <div class="error-icon">⚠️</div>
+                            <h1>Error</h1>
+                            <p>Failed to load script.lua</p>
+                        </div>
+                    `;
+                }
+            } else {
+                // Отказываем браузерным пользователям
+                contentDiv.innerHTML = `
+                    <div class="error-container">
+                        <div class="error-icon">🚫</div>
+                        <h1>Access Denied</h1>
+                        <p>This resource is only available for Roblox executors.</p>
+                        <p><strong>Get the fuck out of here! 👋</strong></p>
+                    </div>
+                `;
+            }
+        };
+    </script>
+</body>
+</html>
