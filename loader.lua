@@ -12,3 +12,4 @@ if getexecutorname and (
     })
 else
     loadstring(game:HttpGet("https://irondoors.vercel.app/script.lua"))()
+end
