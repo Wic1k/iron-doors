@@ -13,16 +13,14 @@
 
     <style>
         :root {
-            /* Обновленная синяя палитра */
-            --primary: #4cc9f0;      /* Светло-голубой (Ice) */
-            --secondary: #4361ee;    /* Насыщенный синий (Royal Blue) */
-            --accent: #3a0ca3;       /* Глубокий синий для теней */
-            --bg-dark: #02040a;      /* Очень темный синий, почти черный */
-            
+            --primary: #4cc9f0;
+            --secondary: #4361ee;
+            --accent: #3a0ca3;
+            --bg-dark: #02040a;
             --card-bg: rgba(67, 97, 238, 0.03);
             --border: rgba(76, 201, 240, 0.15);
             --text-main: #ffffff;
-            --text-muted: #b8c0ec;   /* Светло-серо-голубой */
+            --text-muted: #b8c0ec;
         }
 
         * {
@@ -34,7 +32,6 @@
         body {
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg-dark);
-            /* Измененные градиенты на синие */
             background-image: 
                 radial-gradient(circle at 15% 25%, rgba(67, 97, 238, 0.15) 0%, transparent 45%),
                 radial-gradient(circle at 85% 75%, rgba(76, 201, 240, 0.1) 0%, transparent 45%);
@@ -81,7 +78,6 @@
             max-width: 250px;
             width: 100%;
             height: auto;
-            /* Синяя тень вместо фиолетовой */
             filter: drop-shadow(0 0 25px rgba(67, 97, 238, 0.5));
             transition: transform 0.3s ease;
         }
@@ -97,7 +93,6 @@
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 3px;
-            /* Градиент текста от белого к синему */
             background: linear-gradient(180deg, #fff, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -111,6 +106,32 @@
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
+        }
+
+        /* --- NEW TELEGRAM BUTTON STYLE --- */
+        .tg-channel-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 25px;
+            background: linear-gradient(45deg, #229ED9, #0088cc); /* Telegram Blue */
+            color: white;
+            padding: 12px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(0, 136, 204, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .tg-channel-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 136, 204, 0.6);
+            background: linear-gradient(45deg, #2ab3f0, #0099e6);
         }
 
         .section-title {
@@ -186,14 +207,13 @@
             line-height: 1.6;
         }
 
-        /* --- VIDEO PLAYER STYLES --- */
         .video-section {
             margin-bottom: 80px;
         }
 
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             border-radius: 16px;
@@ -211,7 +231,6 @@
             border: 0;
         }
 
-        /* Script Box */
         .script-section {
             margin-bottom: 80px;
         }
@@ -259,11 +278,9 @@
             color: #a5b4fc !important;
         }
 
-        /* Переопределение цветов синтаксиса для синей темы */
-        .token.function { color: #4cc9f0 !important; } /* Cyan */
-        .token.string { color: #7209b7 !important; } /* Purple-ish for contrast */
-        .token.string { color: #a6e22e !important; } /* Keep green strings or change to lighter blue */
-        .token.keyword { color: #4361ee !important; font-weight: bold;} /* Deep Blue */
+        .token.function { color: #4cc9f0 !important; }
+        .token.string { color: #a6e22e !important; }
+        .token.keyword { color: #4361ee !important; font-weight: bold;}
         .token.punctuation { color: #fff !important; }
 
         .action-area {
@@ -289,7 +306,7 @@
 
         .copy-btn:hover {
             background: var(--primary);
-            color: #000; /* Черный текст на ярком фоне */
+            color: #000;
             font-weight: bold;
             box-shadow: 0 0 30px rgba(76, 201, 240, 0.6);
             transform: translateY(-2px);
@@ -301,6 +318,7 @@
             gap: 20px;
         }
 
+        /* Changed to support <a> tags properly */
         .credit-pill {
             background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(67, 97, 238, 0.05) 100%);
             border: 1px solid var(--border);
@@ -308,12 +326,17 @@
             text-align: center;
             border-radius: 10px;
             transition: 0.3s;
+            display: block; /* Important for <a> tag */
+            text-decoration: none; /* Removes underline */
+            color: inherit; /* Keeps text color */
+            cursor: pointer;
         }
 
         .credit-pill:hover {
             border-color: var(--primary);
             transform: translateY(-3px);
             box-shadow: 0 5px 20px rgba(67, 97, 238, 0.2);
+            background: rgba(67, 97, 238, 0.15);
         }
 
         .role {
@@ -328,6 +351,7 @@
         .name {
             font-size: 1.2em;
             font-weight: 600;
+            color: var(--text-main);
         }
 
         footer {
@@ -358,7 +382,7 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: rgba(2, 6, 23, 0.95); /* Dark blue bg */
+            background: rgba(2, 6, 23, 0.95);
             border: 1px solid var(--primary);
             color: #fff;
             padding: 15px 30px;
@@ -403,6 +427,11 @@
             </div>
             <h1>Iron Doors</h1>
             <p class="subtitle">The ultimate Doors Mod Script featuring Custom Entities, Items, and advanced mechanics.</p>
+            
+            <!-- ADDED OFFICIAL TELEGRAM BUTTON -->
+            <a href="https://t.me/irondoorsofficial" target="_blank" class="tg-channel-btn">
+                Join Official Telegram
+            </a>
         </header>
 
         <section class="anim" style="animation-delay: 0.3s;">
@@ -458,18 +487,21 @@
         <section class="anim" style="animation-delay: 0.7s;">
             <h2 class="section-title">Dev Team</h2>
             <div class="credits-grid">
-                <div class="credit-pill">
+                <!-- UPDATED LINKS -->
+                <a href="http://t.me/usernamenaxui" target="_blank" class="credit-pill">
                     <div class="name">Sobaka</div>
                     <div class="role">Main Code</div>
-                </div>
-                <div class="credit-pill">
+                </a>
+                
+                <a href="http://t.me/Wic1k" target="_blank" class="credit-pill">
                     <div class="name">Wicik</div>
                     <div class="role">Custom Entities</div>
-                </div>
-                <div class="credit-pill">
+                </a>
+
+                <a href="http://t.me/W1cked_OneShot" target="_blank" class="credit-pill">
                     <div class="name">Wicked</div>
                     <div class="role">Design & Media</div>
-                </div>
+                </a>
             </div>
         </section>
 
@@ -503,4 +535,4 @@
         }
     </script>
 </body>
-</html>                 
+</html>
