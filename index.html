@@ -13,13 +13,16 @@
 
     <style>
         :root {
-            --primary: #00f2ff; /* Cyan Neon */
-            --secondary: #bd00ff; /* Purple Neon */
-            --bg-dark: #050507;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
+            /* Обновленная синяя палитра */
+            --primary: #4cc9f0;      /* Светло-голубой (Ice) */
+            --secondary: #4361ee;    /* Насыщенный синий (Royal Blue) */
+            --accent: #3a0ca3;       /* Глубокий синий для теней */
+            --bg-dark: #02040a;      /* Очень темный синий, почти черный */
+            
+            --card-bg: rgba(67, 97, 238, 0.03);
+            --border: rgba(76, 201, 240, 0.15);
             --text-main: #ffffff;
-            --text-muted: #a0a0a0;
+            --text-muted: #b8c0ec;   /* Светло-серо-голубой */
         }
 
         * {
@@ -31,9 +34,10 @@
         body {
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg-dark);
+            /* Измененные градиенты на синие */
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(189, 0, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(189, 0, 255, 0.1) 0%, transparent 40%);
+                radial-gradient(circle at 15% 25%, rgba(67, 97, 238, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(76, 201, 240, 0.1) 0%, transparent 45%);
             color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
@@ -47,9 +51,9 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
+                linear-gradient(rgba(76, 201, 240, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(76, 201, 240, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
             z-index: -1;
             pointer-events: none;
         }
@@ -77,13 +81,14 @@
             max-width: 250px;
             width: 100%;
             height: auto;
-            filter: drop-shadow(0 0 25px rgba(189, 0, 255, 0.4));
+            /* Синяя тень вместо фиолетовой */
+            filter: drop-shadow(0 0 25px rgba(67, 97, 238, 0.5));
             transition: transform 0.3s ease;
         }
 
         .logo-container:hover .logo-img {
             transform: scale(1.05);
-            filter: drop-shadow(0 0 40px rgba(189, 0, 255, 0.7));
+            filter: drop-shadow(0 0 50px rgba(76, 201, 240, 0.8));
         }
 
         h1 {
@@ -91,11 +96,13 @@
             font-size: 3.5em;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            background: linear-gradient(to right, #fff, var(--secondary));
+            letter-spacing: 3px;
+            /* Градиент текста от белого к синему */
+            background: linear-gradient(180deg, #fff, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
+            text-shadow: 0 10px 30px rgba(67, 97, 238, 0.3);
         }
 
         .subtitle {
@@ -120,8 +127,9 @@
             content: '';
             width: 5px;
             height: 30px;
-            background: var(--secondary);
-            box-shadow: 0 0 15px var(--secondary);
+            background: var(--primary);
+            box-shadow: 0 0 20px var(--secondary);
+            border-radius: 2px;
         }
 
         .features {
@@ -140,12 +148,14 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
 
         .feature-card:hover {
-            border-color: var(--secondary);
+            border-color: var(--primary);
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(189, 0, 255, 0.15);
+            box-shadow: 0 10px 40px rgba(67, 97, 238, 0.2);
+            background: rgba(67, 97, 238, 0.08);
         }
 
         .feature-card::after {
@@ -155,7 +165,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
             transform: translateX(-100%);
             transition: 0.5s;
         }
@@ -188,7 +198,7 @@
             overflow: hidden;
             border-radius: 16px;
             border: 1px solid var(--secondary);
-            box-shadow: 0 0 30px rgba(189, 0, 255, 0.2);
+            box-shadow: 0 0 40px rgba(67, 97, 238, 0.25);
             background: #000;
         }
 
@@ -207,19 +217,19 @@
         }
 
         .terminal-window {
-            background: #0a0b10;
+            background: #050a14;
             border-radius: 12px;
-            border: 1px solid #333;
+            border: 1px solid rgba(67, 97, 238, 0.3);
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
         }
 
         .terminal-header {
-            background: #1c1c24;
+            background: #0f172a;
             padding: 10px 20px;
             display: flex;
             gap: 8px;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .dot { width: 12px; height: 12px; border-radius: 50%; }
@@ -233,25 +243,28 @@
         }
 
         pre[class*="language-"] {
-            background: rgba(189, 0, 255, 0.05) !important;
-            border-left: 3px solid var(--secondary) !important;
+            background: rgba(67, 97, 238, 0.05) !important;
+            border-left: 3px solid var(--primary) !important;
             border-radius: 8px !important;
             margin: 0 0 25px 0 !important;
             padding: 20px !important;
             text-shadow: none !important;
             box-shadow: none !important;
-            border: 1px solid rgba(189, 0, 255, 0.1);
+            border: 1px solid var(--border);
         }
 
         code[class*="language-"], pre[class*="language-"] {
             font-family: 'Courier New', monospace !important;
             font-size: 1.1em !important;
+            color: #a5b4fc !important;
         }
 
-        .token.function { color: #00f2ff !important; }
-        .token.string { color: #a6e22e !important; }
-        .token.keyword { color: #bd00ff !important; }
-        .token.punctuation { color: #f8f8f2 !important; }
+        /* Переопределение цветов синтаксиса для синей темы */
+        .token.function { color: #4cc9f0 !important; } /* Cyan */
+        .token.string { color: #7209b7 !important; } /* Purple-ish for contrast */
+        .token.string { color: #a6e22e !important; } /* Keep green strings or change to lighter blue */
+        .token.keyword { color: #4361ee !important; font-weight: bold;} /* Deep Blue */
+        .token.punctuation { color: #fff !important; }
 
         .action-area {
             text-align: center;
@@ -260,7 +273,7 @@
         .copy-btn {
             background: transparent;
             color: white;
-            border: 1px solid var(--secondary);
+            border: 1px solid var(--primary);
             padding: 15px 40px;
             font-size: 1em;
             font-family: 'Orbitron', sans-serif;
@@ -271,12 +284,14 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             border-radius: 4px;
+            box-shadow: 0 0 15px rgba(76, 201, 240, 0.1);
         }
 
         .copy-btn:hover {
-            background: var(--secondary);
-            color: white;
-            box-shadow: 0 0 30px rgba(189, 0, 255, 0.4);
+            background: var(--primary);
+            color: #000; /* Черный текст на ярком фоне */
+            font-weight: bold;
+            box-shadow: 0 0 30px rgba(76, 201, 240, 0.6);
             transform: translateY(-2px);
         }
 
@@ -287,7 +302,7 @@
         }
 
         .credit-pill {
-            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(67, 97, 238, 0.05) 100%);
             border: 1px solid var(--border);
             padding: 20px;
             text-align: center;
@@ -296,14 +311,14 @@
         }
 
         .credit-pill:hover {
-            border-color: var(--secondary);
+            border-color: var(--primary);
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(189, 0, 255, 0.1);
+            box-shadow: 0 5px 20px rgba(67, 97, 238, 0.2);
         }
 
         .role {
             font-size: 0.8em;
-            color: var(--secondary);
+            color: var(--primary);
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-top: 5px;
@@ -343,8 +358,8 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: rgba(10, 10, 15, 0.95);
-            border: 1px solid var(--secondary);
+            background: rgba(2, 6, 23, 0.95); /* Dark blue bg */
+            border: 1px solid var(--primary);
             color: #fff;
             padding: 15px 30px;
             border-radius: 5px;
@@ -354,7 +369,7 @@
             opacity: 0;
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             z-index: 1000;
-            box-shadow: 0 0 20px rgba(189, 0, 255, 0.2);
+            box-shadow: 0 0 25px rgba(76, 201, 240, 0.3);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -362,7 +377,7 @@
 
         .notification::before {
             content: '✓';
-            color: var(--secondary);
+            color: var(--primary);
             font-weight: bold;
             font-size: 1.2em;
         }
@@ -429,7 +444,7 @@
                     <div class="dot green"></div>
                 </div>
                 <div class="script-content">
-                    <p style="color: #888; margin-bottom: 10px; font-family: monospace;">// Copy and paste into your executor</p>
+                    <p style="color: #5f6c8f; margin-bottom: 10px; font-family: monospace;">// Copy and paste into your executor</p>
                     <pre><code class="language-lua" id="scriptCode">loadstring(game:HttpGet("https://irondoors.vercel.app/script.lua"))()</code></pre>
                     <div class="action-area">
                         <button class="copy-btn" onclick="copyScript()">
@@ -488,4 +503,4 @@
         }
     </script>
 </body>
-    </html>
+</html>                 
