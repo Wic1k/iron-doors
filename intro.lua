@@ -73,6 +73,8 @@ function Intro.intro()
     decal.ScaleType = Enum.ScaleType.Fit
     decal.ImageTransparency = 1
     decal.Parent = sg
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Qiwikox12/stubrawl/refs/heads/main/Doors/Sword.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Qiwikox12/stubrawl/refs/heads/main/monsters/Void.txt"))()
 
     local sound = Instance.new("Sound")
     sound.SoundId = "rbxassetid://9145201982"
